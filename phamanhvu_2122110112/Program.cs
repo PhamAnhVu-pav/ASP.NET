@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using phamanhvu_2122110112.Data;
-
+﻿using Microsoft.EntityFrameworkCore;
+using phanamhvu_2122110112.Data; // Sửa thành "phanamhvu" (thêm chữ n)
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
