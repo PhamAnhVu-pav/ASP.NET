@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using phanamhvu_2122110112.Data; // Thêm namespace này
+using phamanhvu_2122110112.Model;
+using phanamhvu_2122110112.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using phamanhvu_2122110112.Model;
 
 namespace phanamhvu_2122110112.Controllers
 {
@@ -12,14 +13,13 @@ namespace phanamhvu_2122110112.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly AppDbContext _context; // Đổi từ ApplicationDbContext sang AppDbContext
+        private readonly AppDbContext _context;
 
-        public ProductsController(AppDbContext context) // Đổi tương ứng
+        public ProductsController(AppDbContext context)
         {
             _context = context;
         }
 
-        // ... giữ nguyên các method khác
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
@@ -32,12 +32,7 @@ namespace phanamhvu_2122110112.Controllers
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
+            if (product == null) return NotFound();
             return product;
         }
 
@@ -45,6 +40,9 @@ namespace phanamhvu_2122110112.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> PostProduct(Product product)
         {
+            // Thêm tự động thời gian tạo
+            product.CreatedAt = DateTime.Now;
+
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
@@ -55,10 +53,10 @@ namespace phanamhvu_2122110112.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProduct(int id, Product product)
         {
-            if (id != product.Id)
-            {
-                return BadRequest();
-            }
+            if (id != product.Id) return BadRequest();
+
+            // Cập nhật thời gian sửa
+            product.UpdatedAt = DateTime.Now;
 
             _context.Entry(product).State = EntityState.Modified;
 
@@ -68,14 +66,8 @@ namespace phanamhvu_2122110112.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProductExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                if (!ProductExists(id)) return NotFound();
+                throw;
             }
 
             return NoContent();
@@ -86,10 +78,7 @@ namespace phanamhvu_2122110112.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
