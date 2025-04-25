@@ -1,0 +1,16 @@
+.image-placeholder {
+    width: 100px;
+    height: 60px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border: 1px dashed #ccc;
+    color: #666;
+  }
+  
+  .product-image {
+    object-fit: contain;
+    max-height: 100px;
+  }

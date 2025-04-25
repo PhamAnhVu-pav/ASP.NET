@@ -1,0 +1,113 @@
+/* src/frontend/Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:rgb(239, 86, 96);
+  padding: 15px 30px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(222, 54, 54, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo a {
+  font-size: 1.8em;
+  font-weight: bold;
+  color:rgb(207, 222, 46);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-button {
+  color:rgb(220, 235, 12);
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95em;
+  transition: background-color 0.3s ease, transform 0.2s;
+}
+
+.nav-button:hover {
+  background-color: #3c3c5a;
+  transform: translateY(-1px);
+}
+
+.nav button.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+/* src/frontend/Header.css */
+.search-container {
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+  flex-grow: 1;
+  max-width: 500px;
+}
+
+.search-input {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px 0 0 4px;
+  width: 100%;
+  font-size: 14px;
+}
+
+.search-button {
+  padding: 8px 15px;
+  background-color:rgb(206, 228, 41);
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Căn chỉnh layout header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+/* Thiết kế responsive cho mobile */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .search-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 10px 0;
+  }
+  
+  .nav {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
